@@ -15,7 +15,11 @@ router.delete('/delete/:id', customerController.deleteCustomer);
 // router.get('/view/:userId', customerController.getCustomerDetails);
 
 router.get('/view', customerController.getCustomerDetails);
-
+// const rawBodyBuffer = (req, res, buf) => {
+//     req.rawBody = buf.toString('utf8');
+//   };
+  
+//   router.use('/intercom-webhook', express.json({ verify: rawBodyBuffer }));
 // Intercom webhook handler
 router.post('/intercom-webhook', async (req, res) => {
     // 1. Verify HMAC signature
@@ -77,6 +81,8 @@ router.post('/intercom-webhook', async (req, res) => {
     
         if (adminReplies.length > 0) {
           const latestReply = adminReplies[0].body;
+
+        console.log(conversationId);
     
           // 4. Update Database
           try {
