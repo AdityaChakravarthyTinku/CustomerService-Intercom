@@ -14,10 +14,8 @@ A scalable and modular microservices-based customer service platform built with 
 - [Environment Setup](#environment-setup)
 - [Running the Project](#running-the-project)
 - [How It Works](#how-it-works)
-- [Screenshots](#screenshots)
 - [Future Improvements](#future-improvements)
 - [Credits](#credits)
-- [License](#license)
 
 ---
 
@@ -30,8 +28,9 @@ A scalable and modular microservices-based customer service platform built with 
 - Service Request creation & tracking
 - Intercom integration for support conversations
 - Automated fetching of agent replies from Intercom
-- Cron job script to sync replies into the system
+- Cron job script to sync replies into the system(Deprecated)
 - Clean Vite + React frontend interface
+- HMAC Identity Verification
 
 ---
 
@@ -188,13 +187,13 @@ npm run dev
 - Get:
   - Personal Access Token → `INTERCOM_TOKEN`
   - Client Secret → `INTERCOM_WEBHOOK_SECRET`
-- Set webhook URL to: `http://localhost:5001/intercom-webhook` in Intercom settings
+- Set webhook URL to: `http://localhost:3001/customer/intercom-webhook` or `http://randomgenerated.serveo.net/customer/intercom-webhook` in Intercom settings
 
 ---
 
 ## 🔄 Syncing Intercom Replies
 
-A cron script runs to sync agent replies into your DB:
+A cron script runs to sync agent replies into your DB: During Manual Run
 
 ### Manual Run
 
@@ -217,14 +216,6 @@ node fetchReplies.js
 
 ---
 
-<!-- ## 🖼️ Screenshots
-
-| Make Request                         | View Requests                        |
-|-------------------------------------|--------------------------------------|
-| ![Make](src/assets/PIR_4547243.png) | ![View](src/assets/prodpricing2668957-200.png) |
-
---- -->
-
 
 
 ## 🙏 Credits
@@ -232,10 +223,4 @@ node fetchReplies.js
 - Developed by **Aditya**
 - Intercom API: [https://developers.intercom.com](https://developers.intercom.com)
 - Google OAuth Docs: [https://developers.google.com/identity](https://developers.google.com/identity)
-
----
-
-## 📄 License
-
-MIT License – Use it, build on it, improve it. Just give credits!
 

@@ -15,7 +15,6 @@ const CustomerSchema = new mongoose.Schema({
     type: Number,
     //required: true,
     required: true,
-    // match: /^\+\d{10,15}$/,
   },
   category: {
     type: String,

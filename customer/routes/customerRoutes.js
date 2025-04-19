@@ -29,9 +29,9 @@ router.post('/intercom-webhook', async (req, res) => {
                        .update(JSON.stringify(req.body))
                        .digest('hex');
   
-    if (hmac !== signature) {
-      return res.status(401).send("Unauthorized");
-    }
+    // if (hmac !== signature) {
+    //   return res.status(401).send("Unauthorized");
+    // }
   
     // 2. Process the event
     const event = req.body;
@@ -71,7 +71,7 @@ router.post('/intercom-webhook', async (req, res) => {
         console.log('Webhook Payload:', JSON.stringify(event, null, 2));
     
         // Extract Critical Data
-        const conversationId = event.data.item.id; // CORRECT conversation ID
+        const convoid = event.data.item.id; // CORRECT conversation ID
         const conversationParts = event.data.item.conversation_parts?.conversation_parts || [];
     
         // Find LATEST admin reply
@@ -82,7 +82,10 @@ router.post('/intercom-webhook', async (req, res) => {
         if (adminReplies.length > 0) {
           const latestReply = adminReplies[0].body;
 
-        console.log(conversationId);
+        console.log(convoid);
+        const conversationId= event.data.item.source.id;
+
+        console.log(`This is for updated response to db: for dbs convoid:${conversationId}`);
     
           // 4. Update Database
           try {
@@ -91,7 +94,7 @@ router.post('/intercom-webhook', async (req, res) => {
               { $set: { response: latestReply } },
               { new: true }
             );
-            console.log(`✅ Updated response for conversation ${conversationId}`);
+            console.log(`✅ Updated response for conversation ${conversationId} for intercom convoid: ${convoid}`);
             return res.sendStatus(200);
           } catch (err) {
             console.error('Database update error:', err);
